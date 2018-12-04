@@ -1,0 +1,61 @@
+body{
+  background-color: #808080;
+}
+
+canvas{
+  background-color: #D3D3D3;
+  margin: 50px auto 10px;
+  display: block;
+  box-shadow: 0 3px 10px #DCDCDC;
+  border: 2px solid #DCDCDC;
+
+}
+
+#pDiv{
+    scroll-behavior: auto;
+    width: 800;
+    height: 400;
+}
+
+#canvasGrid{
+  width: 50%;
+  overflow: auto;
+  margin: auto;
+
+}
+
+#canvasGrid canvas{
+  display: block;
+  width: 150px;
+  height: 150px;
+  float: left;
+  margin: 10px;
+  cursor: pointer;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#imgGrid{
+  width: 50%;
+  overflow: auto;
+  margin: auto;
+}
+
+#imgGrid img{
+  display: block;
+  width: 50px;
+  height: 50px;
+  float: left;
+  margin: 10px;
+  cursor: pointer;
+}
+
+#buttonDiv{
+  width: 50%;
+  overflow: auto;
+  margin: auto;
+}
+
+#inverterButton{
+  content: "Inverter";
+}

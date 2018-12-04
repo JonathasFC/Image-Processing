@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Tarefa 1 - Pixel a Pixel</title>
+    <link rel="stylesheet" href="pixels.css">
+  </head>
+  <body>
+    <script src="pixels.js"></script>
+    <script  type="text/javascript" id="01">
+
+      var canvasGrid = document.createElement("div");
+      canvasGrid.id = "canvasGrid";
+      document.body.appendChild(canvasGrid);
+
+      var imagemCanvas = new Canvas (100, 100);
+      imagemCanvas.id = "imagemCanvas";
+      canvasGrid.appendChild(imagemCanvas.canvas);
+
+      var grid = document.createElement("div");
+      grid.id = "imgGrid";
+      document.body.appendChild(grid);
+
+      var buttonDiv = document.createElement("div");
+      buttonDiv.id = "buttonDiv";
+      document.body.appendChild(buttonDiv);
+
+      var inverterButton = document.createElement('button');
+      inverterButton.id = "inverterButton";
+      var nome = document.createTextNode('Rotacionar');
+      inverterButton.appendChild(nome);
+      buttonDiv.appendChild(inverterButton);
+
+      var negativoButton = document.createElement('button');
+      negativoButton.id = "negativoButton";
+      var nome = document.createTextNode('Inverter');
+      negativoButton.appendChild(nome);
+      buttonDiv.appendChild(negativoButton);
+
+      var medianaButton = document.createElement('button');
+      medianaButton.id = "medianaButton";
+      var nome = document.createTextNode('Mediana');
+      medianaButton.appendChild(nome);
+      buttonDiv.appendChild(medianaButton);
+
+      var vermelhoButton = document.createElement('button');
+      vermelhoButton.id = "vermelhoButton";
+      var nome = document.createTextNode('Tudo vermelho!');
+      vermelhoButton.appendChild(nome);
+      buttonDiv.appendChild(vermelhoButton);
+
+      var verdeButton = document.createElement('button');
+      verdeButton.id = "verdeButton";
+      var nome = document.createTextNode('Tudo verde!');
+      verdeButton.appendChild(nome);
+      buttonDiv.appendChild(verdeButton);
+
+      var azulButton = document.createElement('button');
+      azulButton.id = "azulButton";
+      var nome = document.createTextNode('Tudo azul!');
+      azulButton.appendChild(nome);
+      buttonDiv.appendChild(azulButton);
+
+      var dilatarButton = document.createElement('button');
+      dilatarButton.id = "dilatarButton";
+      var nome = document.createTextNode('Dilatacao');
+      dilatarButton.appendChild(nome);
+      buttonDiv.appendChild(dilatarButton);
+
+      var erodirButton = document.createElement('button');
+      erodirButton.id = "erodirButton";
+      var nome = document.createTextNode('Erosao');
+      erodirButton.appendChild(nome);
+      buttonDiv.appendChild(erodirButton);
+
+      var dilatacaoErosaoButton = document.createElement('button');
+      dilatacaoErosaoButton.id = "dilatacaoErosaoButton";
+      var nome = document.createTextNode('Dilatou/Erodiu');
+      dilatacaoErosaoButton.appendChild(nome);
+      buttonDiv.appendChild(dilatacaoErosaoButton);
+
+      var erosaoDilatacaoButton = document.createElement('button');
+      erosaoDilatacaoButton.id = "erosaoDilatacaoButton";
+      var nome = document.createTextNode('Erodiu/Dilatou');
+      erosaoDilatacaoButton.appendChild(nome);
+      buttonDiv.appendChild(erosaoDilatacaoButton);
+
+      var subtrairErosaoButton = document.createElement('button');
+      subtrairErosaoButton.id = "subtrairErosaoButton";
+      var nome = document.createTextNode('Erodiu/Subtraiu');
+      subtrairErosaoButton.appendChild(nome);
+      buttonDiv.appendChild(subtrairErosaoButton);
+
+      var pixelDiv = document.createElement("div");
+      pixelDiv.id = "pDiv";
+      document.body.appendChild(pixelDiv);
+
+      var pixelCanvas = new Canvas (2800,2550);
+      pixelCanvas.id = "pixelsCanvas";
+      pixelDiv.appendChild(pixelCanvas.canvas);
+
+
+      for (var i=1; i<13; i++){
+        var img = document.createElement("img");
+        img.src = "imagens/img" + i + ".jpg";
+        img.onclick = function(){
+          pixelCanvas.limpar();
+
+          imagemCanvas.carregarImagem(this);
+
+          var dados = imagemCanvas.getPixels(this);// dados da imagem
+          console.log(dados);
+
+          var pixelsMatriz = imagemCanvas.toPixelMatriz(dados);
+          var linhaImpressao = 25; // linha de impressão do método fillText
+
+          for (var i = 0; i < dados.width; i++) {
+            pixelCanvas.ctx.fillText(pixelsMatriz[i], 25, linhaImpressao);
+            linhaImpressao += 25;
+          }
+
+          negativoButton.onclick = function(){
+            var dados = imagemCanvas.getPixels(this);// dados da imagem
+            imagemCanvas.inverter(dados);
+          };
+
+          inverterButton.onclick = function(){
+            var dados = imagemCanvas.getPixels(this);// dados da imagem
+            imagemCanvas.rotacionar(dados);
+          };
+
+          medianaButton.onclick = function(){
+            var dados = imagemCanvas.getPixels(this);
+            var matriz = imagemCanvas.toPixelMatriz(dados);
+            imagemCanvas.mediana(dados, matriz);
+          };
+
+          vermelhoButton.onclick = function(){
+            var dados = imagemCanvas.getPixels(this);
+            imagemCanvas.toRed(dados);
+          };
+
+          verdeButton.onclick = function(){
+            var dados = imagemCanvas.getPixels(this);
+            imagemCanvas.toGreen(dados);
+          };
+
+          azulButton.onclick = function(){
+            var dados = imagemCanvas.getPixels(this);
+            imagemCanvas.toBlue(dados);
+          };
+
+          dilatarButton.onclick = function(){
+            var dados = imagemCanvas.getPixels(this);
+            var matriz = imagemCanvas.toPixelMatriz(dados);
+            imagemCanvas.dilatar(dados, matriz);
+          };
+
+          erodirButton.onclick = function(){
+            var dados = imagemCanvas.getPixels(this);
+            var matriz = imagemCanvas.toPixelMatriz(dados);
+            imagemCanvas.erodir(dados, matriz);
+          };
+
+          dilatacaoErosaoButton.onclick = function(){
+            var dados = imagemCanvas.getPixels(this);
+            var matriz = imagemCanvas.toPixelMatriz(dados);
+            imagemCanvas.dilatacaoErosao(dados, matriz);
+          };
+
+          erosaoDilatacaoButton.onclick = function(){
+            var dados = imagemCanvas.getPixels(this);
+            var matriz = imagemCanvas.toPixelMatriz(dados);
+            imagemCanvas.erosaoDilatacao(dados, matriz);
+          };
+
+          subtrairErosaoButton.onclick = function(){
+            var dados = imagemCanvas.getPixels(this);
+            var matriz = imagemCanvas.toPixelMatriz(dados);
+            imagemCanvas.subtrairErosao(dados, matriz);
+          };
+        };
+        grid.appendChild(img);
+      };
+
+     </script>
+
+  </body>
+</html>

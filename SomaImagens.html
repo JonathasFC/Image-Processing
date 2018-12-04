@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Tarefa 1 - Pixel a Pixel</title>
+    <link rel="stylesheet" href="pixels.css">
+  </head>
+  <body>
+    <script src="pixels.js"></script>
+    <script  type="text/javascript" id="01">
+
+      var canvasGrid = document.createElement("div");
+      canvasGrid.id = "canvasGrid";
+      document.body.appendChild(canvasGrid);
+
+      var imagemCanvas = new Canvas (100, 100);
+      imagemCanvas.id = "imagemCanvas";
+      canvasGrid.appendChild(imagemCanvas.canvas);
+
+      var imagemCanvasTwo = new Canvas (100, 100);
+      imagemCanvasTwo.id = "imagemCanvasTwo";
+      canvasGrid.appendChild(imagemCanvasTwo.canvas);
+
+      var resultadoCanvas = new Canvas (100, 100);
+      resultadoCanvas.id = "resultadoCanvas";
+      canvasGrid.appendChild(resultadoCanvas.canvas);
+
+      var grid = document.createElement("div");
+      grid.id = "imgGrid";
+      document.body.appendChild(grid);
+
+      var buttonDiv = document.createElement("div");
+      buttonDiv.id = "buttonDiv";
+      document.body.appendChild(buttonDiv);
+
+      var somaButton = document.createElement('button');
+      somaButton.id = "somaButton";
+      var nome = document.createTextNode('Somar Imagens');
+      somaButton.appendChild(nome);
+      buttonDiv.appendChild(somaButton);
+
+      for (var i=1; i<12; i++){
+        var img = document.createElement("img");
+        img.src = "imagens/img" + i + ".jpg";
+
+        var contador = 1;
+
+        img.onclick = function(){
+
+          if (contador%2 == 0) {
+            imagemCanvasTwo.carregarImagem(this);
+            contador += 1;
+          } else {
+            imagemCanvas.carregarImagem(this);
+            contador += 1;
+          }
+
+          somaButton.onclick = function(){
+            imagemCanvas.somarImagens(imagemCanvas, imagemCanvasTwo, resultadoCanvas);
+          };
+
+          // var matriz = imagemCanvas.toPixelMatriz(dados);
+
+        };
+        grid.appendChild(img);
+      };
+
+     </script>
+
+  </body>
+</html>
